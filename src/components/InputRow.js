@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import SolutionRow from './SolutionRow';
+
 function InputRow(props) {
 	const [input, setInput] = useState('');
 
@@ -45,8 +46,8 @@ function InputRow(props) {
 									<Button
                                         variant= 'secondary'
 										style={{
-											width: '100px',
-											height: '100px',
+											width: '78px',
+											height: '78px',
 											margin: '5px',
 										}}
 									>

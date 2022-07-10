@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SolutionRow from './components/SolutionRow';
 import InputRow from './components/InputRow';
+import NavBar from './components/NavBar';
+
 
 const API_URL = 'https://raw.githubusercontent.com/tabatkins/wordle-list/main/words';
 const MAX_SOLUTIONS = 4;
@@ -47,6 +49,7 @@ function App() {
 
 	return (
 		<div className="App">
+      <NavBar></NavBar>
 			{solutionArray.map((sol) => {
 				return <SolutionRow word={sol} solution={solution} checkLetterColor={checkLetterColor} />;
 			})}

@@ -11,8 +11,8 @@ function SolutionRow(props) {
 						<Button
 							variant={props.checkLetterColor(letter, i)}
 							style={{
-								width: '100px',
-								height: '100px',
+								width: '70px',
+								height: '70px',
 								margin: '5px',
 							}}
 						>
