@@ -5,11 +5,18 @@ function InputRow(props) {
 	const [input, setInput] = useState('');
 
 	const handleUserKeyPress = useCallback((event) => {
+        if (event.key === 'Enter'){
+            if(input.length < props.solution.length){
+                return
+            }
+            setInput('')
+            props.handleEnterKeyPress(input);
+        }
 		if (event.key === 'Backspace') {
 			setInput(input.slice(0, -1));
 			return;
 		}
-		if (input.length > props.solution.length) {
+		if (input.length >= props.solution.length) {
 			return;
 		}
 		if (event.keyCode === 32 || (event.keyCode >= 65 && event.keyCode <= 90)) {
@@ -17,6 +24,7 @@ function InputRow(props) {
 			return;
 		}
 	});
+
 
 	useEffect(() => {
 		window.addEventListener('keydown', handleUserKeyPress);
@@ -30,11 +38,12 @@ function InputRow(props) {
 		<div>
 			<div>
 				{
-					<ButtonGroup size="lg" className="mb-2" style={{ margin: '20px' }}>
+					<ButtonGroup size="lg" className="mb-2" style={{ margin: '20px', borderStyle: 'inset' }}>
 						{[
 							[...props.solution].map((letter, i) => {
 								return (
 									<Button
+                                        variant= 'secondary'
 										style={{
 											width: '100px',
 											height: '100px',

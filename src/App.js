@@ -12,7 +12,7 @@ function App() {
 	const [solution, setSolution] = useState('');
 	const [solutionArray, setSolutionArray] = useState([]);
 
-  const checkLetterColor = (letter, index) => {
+	const checkLetterColor = (letter, index) => {
 		if (solution[index] == letter) {
 			return 'success';
 		} else if (solution.includes(letter)) {
@@ -21,6 +21,12 @@ function App() {
 			return 'danger';
 		}
 	};
+
+  const handleEnterKeyPress = (input) => {
+    let result = solutionArray.slice(1);
+    result.push(input);
+    setSolutionArray(result);
+  };
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -42,9 +48,10 @@ function App() {
 	return (
 		<div className="App">
 			{solutionArray.map((sol) => {
-				return <SolutionRow word={sol} solution={solution} checkLetterColor = {checkLetterColor}/>;
+				return <SolutionRow word={sol} solution={solution} checkLetterColor={checkLetterColor} />;
 			})}
-      <InputRow solution = {solution}/>
+
+			<InputRow solution={solution} handleEnterKeyPress = {handleEnterKeyPress}  />
 		</div>
 	);
 }
