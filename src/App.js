@@ -1,26 +1,44 @@
 import './App.css';
-import MainPage from "./pages/MainPage";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import SolutionRow from './components/SolutionRow';
 
 
 const API_URL = 'https://raw.githubusercontent.com/tabatkins/wordle-list/main/words';
+const MAX_SOLUTIONS = 4;
 
-const App = () => {
+
+function App() {
+
     const [data, setData] = useState([]);
+    const [solution, setSolution] = useState('');
+    const [solutionArray, setSolutionArray] = useState([]);
+
     useEffect( () => {
-
-        const fetchData = async () => {
+          const fetchData = async () => {
             const res = await axios.get(API_URL);
-            setData(res.data.split('\n'));
-        };
+            const array = res.data.split('\n');
+            setData(array);
+            setSolution(array[Math.floor(Math.random()*array.length)]);
 
-        fetchData();
-    },[]);
+            let targetSolutions = [];
+            for (let i = 0; i < MAX_SOLUTIONS; i++){
+              targetSolutions.push(array[Math.floor(Math.random()*array.length)]);
+            }
+            setSolutionArray(targetSolutions);
+          }
+
+          fetchData();
+    }, []);
 
   return (
     <div className="App">
-      <MainPage words = {data}/>
+      {
+        solutionArray.map(sol =>{
+          return <SolutionRow word = {sol}/>
+        })
+      }
+        
     </div>
   );
 }
